@@ -1,0 +1,23 @@
+{
+  "xsappname": "sap-mcp-server",
+  "tenant-mode": "dedicated",
+  "oauth2-configuration": {
+    "grant-types": ["client_credentials"]
+  },
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.mcp_access",
+      "description": "Access MCP Server tools"
+    }
+  ],
+  "authorities": [
+    "$XSAPPNAME.mcp_access"
+  ],
+  "role-templates": [
+    {
+      "name": "MCPClient",
+      "description": "MCP client role for tool access",
+      "scope-references": ["$XSAPPNAME.mcp_access"]
+    }
+  ]
+}

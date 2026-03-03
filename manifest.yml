@@ -1,0 +1,21 @@
+---
+applications:
+  - name: sap-mcp-server
+    memory: 256M
+    disk_quota: 512M
+    instances: 1
+    buildpacks:
+      - python_buildpack
+    command: uvicorn main:app --host 0.0.0.0 --port $PORT
+    health-check-type: http
+    health-check-http-endpoint: /health
+    services:
+      - sap-mcp-server-uaa
+    env:
+      PYTHON_VERSION: 3.12.x
+      LOG_LEVEL: DEBUG
+      MCP_RATE_LIMIT_MAX_REQUESTS: 120
+      MCP_RATE_LIMIT_WINDOW_SEC: 60
+      JWKS_CACHE_TTL_SEC: 600
+      JWKS_STALE_TTL_SEC: 3600
+      JWKS_HTTP_TIMEOUT_SEC: 2

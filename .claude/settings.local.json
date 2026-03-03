@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(\"c:/MCP/sap_mcp_dev/venv/Scripts/python.exe\" --version)",
+      "Bash(\"c:/MCP/sap_mcp_dev/venv/Scripts/python\" --version)",
+      "WebFetch(domain:help.sap.com)",
+      "WebFetch(domain:json-rpc.dev)",
+      "Bash(c:MCPsap_mcp_devvenvScriptspip install flask)",
+      "Bash(cmd /c \"c:\\\\MCP\\\\sap_mcp_dev\\\\venv\\\\Scripts\\\\pip.exe install flask\")",
+      "Bash(cmd /c \"c:\\\\MCP\\\\sap_mcp_dev\\\\venv\\\\Scripts\\\\pip.exe install flask && echo INSTALL_SUCCESS\")",
+      "Bash(powershell -Command \"& 'c:\\\\MCP\\\\sap_mcp_dev\\\\venv\\\\Scripts\\\\pip.exe' install flask:*)",
+      "Bash(powershell -Command \"Start-Process -FilePath ''c:\\\\MCP\\\\sap_mcp_dev\\\\venv\\\\Scripts\\\\python.exe'' -ArgumentList ''c:\\\\MCP\\\\sap_mcp_dev\\\\main.py'' -WindowStyle Hidden -PassThru | Select-Object -ExpandProperty Id\")",
+      "Bash(powershell -Command \"Start-Sleep -Seconds 2; Invoke-RestMethod -Uri ''http://localhost:8080/health'' -Method Get | ConvertTo-Json\")",
+      "Bash(powershell -Command \"$body = ''{\"\"jsonrpc\"\":\"\"2.0\"\",\"\"id\"\":0,\"\"method\"\":\"\"initialize\"\",\"\"params\"\":{\"\"protocolVersion\"\":\"\"2025-03-26\"\",\"\"capabilities\"\":{},\"\"clientInfo\"\":{\"\"name\"\":\"\"test\"\",\"\"version\"\":\"\"1.0\"\"}}}''; Invoke-RestMethod -Uri ''http://localhost:8080/mcp'' -Method Post -ContentType ''application/json'' -Body $body | ConvertTo-Json -Depth 10\")",
+      "Bash(powershell -Command \"Invoke-RestMethod -Uri ''http://localhost:8080/mcp'' -Method Post -ContentType ''application/json'' -Body ''{\"\"jsonrpc\"\":\"\"2.0\"\",\"\"id\"\":0,\"\"method\"\":\"\"initialize\"\",\"\"params\"\":{\"\"protocolVersion\"\":\"\"2025-03-26\"\",\"\"capabilities\"\":{},\"\"clientInfo\"\":{\"\"name\"\":\"\"test\"\",\"\"version\"\":\"\"1.0\"\"}}}'' | ConvertTo-Json -Depth 10\")",
+      "Bash(powershell -Command \"Invoke-RestMethod -Uri ''http://localhost:8080/mcp'' -Method Post -ContentType ''application/json'' -Body ''{\"\"jsonrpc\"\":\"\"2.0\"\",\"\"id\"\":1,\"\"method\"\":\"\"tools/list\"\",\"\"params\"\":{}}'' | ConvertTo-Json -Depth 10\")",
+      "Bash(powershell -Command \"Invoke-RestMethod -Uri ''http://localhost:8080/mcp'' -Method Post -ContentType ''application/json'' -Body ''{\"\"jsonrpc\"\":\"\"2.0\"\",\"\"id\"\":2,\"\"method\"\":\"\"tools/call\"\",\"\"params\"\":{\"\"name\"\":\"\"hello\"\",\"\"arguments\"\":{\"\"name\"\":\"\"SAP\"\"}}}'' | ConvertTo-Json -Depth 10\")",
+      "Bash(powershell -Command:*)",
+      "Bash(cf app:*)",
+      "Bash(cf env:*)",
+      "Bash(cf logs:*)",
+      "Bash(curl:*)"
+    ]
+  }
+}
