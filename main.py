@@ -89,6 +89,41 @@ async def health(_request: Request) -> JSONResponse:
     return JSONResponse({"status": "ok"})
 
 
+async def check_heatwave(request: Request) -> JSONResponse:
+    """폭염 판단 엔드포인트(추가)"""
+    body = await request.json()
+    dates = body.get("dates", [])
+    max_temperatures = body.get("max_temperatures", [])
+    
+    alerts = [
+        {"date": dates[i], "temp": max_temperatures[i]}
+        for i in range(len(dates))
+        if max_temperatures[i] >= 30
+    ]
+    
+    return JSONResponse({
+        "alert": len(alerts) > 0,
+        "dates": alerts
+    })
+
+async def check_rain(request: Request) -> JSONResponse:
+    """강수 판단 엔드포인트(추가)"""
+    body = await request.json()
+    dates = body.get("dates", [])
+    probabilities = body.get("probabilities", [])
+    
+    rainy_days = [
+        {"date": dates[i], "probability": probabilities[i]}
+        for i in range(len(dates))
+        if probabilities[i] >= 60
+    ]
+    
+    return JSONResponse({
+        "alert": len(rainy_days) > 0,
+        "dates": rainy_days
+    })
+
+
 # ── Starlette 앱 ──
 
 app = Starlette(

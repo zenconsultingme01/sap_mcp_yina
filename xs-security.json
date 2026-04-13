@@ -1,5 +1,5 @@
 {
-  "xsappname": "sap-mcp-server",
+  "xsappname": "sap-mcp-yina",
   "tenant-mode": "dedicated",
   "oauth2-configuration": {
     "grant-types": ["client_credentials"]

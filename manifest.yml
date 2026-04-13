@@ -1,6 +1,6 @@
 ---
 applications:
-  - name: sap-mcp-server
+  - name: sap-mcp-yina
     memory: 256M
     disk_quota: 512M
     instances: 1
@@ -10,7 +10,7 @@ applications:
     health-check-type: http
     health-check-http-endpoint: /health
     services:
-      - sap-mcp-server-uaa
+      - sap-mcp-yina-uaa
     env:
       PYTHON_VERSION: 3.12.x
       LOG_LEVEL: DEBUG

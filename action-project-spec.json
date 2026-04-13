@@ -1,0 +1,118 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Weather Judgement API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://sap-mcp-server.cfapps.jp10.hana.ondemand.com"
+    }
+  ],
+  "paths": {
+    "/api/check_heatwave": {
+      "post": {
+        "summary": "7일 예보에서 폭염 여부를 판단합니다",
+        "operationId": "checkHeatwave",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dates": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "max_temperatures": {
+                    "type": "array",
+                    "items": { "type": "number" }
+                  }
+                },
+                "required": ["dates", "max_temperatures"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "판단 결과",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "alert": { "type": "boolean" },
+                    "dates": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "date": { "type": "string" },
+                          "temp": { "type": "number" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/check_rain": {
+      "post": {
+        "summary": "7일 예보에서 강수 여부를 판단합니다",
+        "operationId": "checkRain",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dates": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "probabilities": {
+                    "type": "array",
+                    "items": { "type": "number" }
+                  }
+                },
+                "required": ["dates", "probabilities"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "판단 결과",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "alert": { "type": "boolean" },
+                    "dates": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "date": { "type": "string" },
+                          "probability": { "type": "number" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
