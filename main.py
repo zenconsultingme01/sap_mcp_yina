@@ -92,8 +92,10 @@ async def health(_request: Request) -> JSONResponse:
 async def check_heatwave(request: Request) -> JSONResponse:
     """폭염 판단 엔드포인트(추가)"""
     body = await request.json()
-    dates = body.get("dates", [])
-    max_temperatures = body.get("max_temperatures", [])
+
+    # 쉼표 구분 문자열을 배열로 변환
+    dates = [d.strip() for d in body.get("dates", "").split(",")]
+    max_temperatures = [float(t.strip()) for t in body.get("max_temperatures", "").split(",")]
     
     alerts = [
         {"date": dates[i], "temp": max_temperatures[i]}
@@ -109,8 +111,10 @@ async def check_heatwave(request: Request) -> JSONResponse:
 async def check_rain(request: Request) -> JSONResponse:
     """강수 판단 엔드포인트(추가)"""
     body = await request.json()
-    dates = body.get("dates", [])
-    probabilities = body.get("probabilities", [])
+
+    # 쉼표 구분 문자열을 배열로 변환
+    dates = [d.strip() for d in body.get("dates", "").split(",")]
+    probabilities = [float(p.strip()) for p in body.get("probabilities", "").split(",")]
     
     rainy_days = [
         {"date": dates[i], "probability": probabilities[i]}

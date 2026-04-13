@@ -22,12 +22,12 @@
                 "type": "object",
                 "properties": {
                   "dates": {
-                    "type": "array",
-                    "items": { "type": "string" }
+                    "type": "string",
+                    "description": "쉼표로 구분된 날짜 (예: 2026-04-09,2026-04-10,2026-04-11)"
                   },
                   "max_temperatures": {
-                    "type": "array",
-                    "items": { "type": "number" }
+                    "type": "string",
+                    "description": "쉼표로 구분된 최고 기온 (예: 32.2,33.0,32.4)"
                   }
                 },
                 "required": ["dates", "max_temperatures"]
@@ -74,12 +74,12 @@
                 "type": "object",
                 "properties": {
                   "dates": {
-                    "type": "array",
-                    "items": { "type": "string" }
+                    "type": "string",
+                    "description": "쉼표로 구분된 날짜 (예: 2026-04-09,2026-04-10,2026-04-11)"
                   },
                   "probabilities": {
-                    "type": "array",
-                    "items": { "type": "number" }
+                    "type": "string",
+                    "description": "쉼표로 구분된 강수 확률 (예: 0,31,72)"
                   }
                 },
                 "required": ["dates", "probabilities"]
