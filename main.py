@@ -16,6 +16,7 @@ from starlette.routing import Route
 from auth import XSUAAAuthMiddleware
 import tool as tool_registry
 import tools  # noqa: F401 – 도구 등록 실행
+import tools_weather  # noqa: F401 – Open Meteo 날씨 도구 등록
 
 # ── 로깅 ──
 
