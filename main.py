@@ -13,7 +13,7 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 from starlette.routing import Route
 
-from auth import XSUAAAuthMiddleware
+# from auth import XSUAAAuthMiddleware
 import tool as tool_registry
 import tools  # noqa: F401 – 도구 등록 실행
 import tools_weather  # noqa: F401 – Open Meteo 날씨 도구 등록
@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 # ── MCP 서버 ──
 
-mcp_app = Server("sap-mcp-server")
+mcp_app = Server("sap-mcp-yina")
 
 
 @mcp_app.list_tools()
@@ -134,11 +134,13 @@ app = Starlette(
     routes=[
         Route("/mcp", endpoint=MCPRoute()),   # GET + POST 모두 처리
         Route("/health", endpoint=health, methods=["GET"]),
+        Route("/api/check_heatwave", endpoint=check_heatwave, methods=["POST"]),  # 추가
+        Route("/api/check_rain", endpoint=check_rain, methods=["POST"]),          # 추가
     ],
     lifespan=lifespan,
 )
 
-app.add_middleware(XSUAAAuthMiddleware)
+# app.add_middleware(XSUAAAuthMiddleware)
 
 
 if __name__ == "__main__":
