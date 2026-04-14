@@ -88,54 +88,12 @@ async def health(_request: Request) -> JSONResponse:
     """CF 헬스 체크 엔드포인트."""
     return JSONResponse({"status": "ok"})
 
-
-async def check_heatwave(request: Request) -> JSONResponse:
-    """폭염 판단 엔드포인트(추가)"""
-    body = await request.json()
-
-    # 쉼표 구분 문자열을 배열로 변환
-    dates = [d.strip() for d in body.get("dates", "").split(",")]
-    max_temperatures = [float(t.strip()) for t in body.get("max_temperatures", "").split(",")]
-    
-    alerts = [
-        {"date": dates[i], "temp": max_temperatures[i]}
-        for i in range(len(dates))
-        if max_temperatures[i] >= 30
-    ]
-    
-    return JSONResponse({
-        "alert": len(alerts) > 0,
-        "dates": alerts
-    })
-
-async def check_rain(request: Request) -> JSONResponse:
-    """강수 판단 엔드포인트(추가)"""
-    body = await request.json()
-
-    # 쉼표 구분 문자열을 배열로 변환
-    dates = [d.strip() for d in body.get("dates", "").split(",")]
-    probabilities = [float(p.strip()) for p in body.get("probabilities", "").split(",")]
-    
-    rainy_days = [
-        {"date": dates[i], "probability": probabilities[i]}
-        for i in range(len(dates))
-        if probabilities[i] >= 60
-    ]
-    
-    return JSONResponse({
-        "alert": len(rainy_days) > 0,
-        "dates": rainy_days
-    })
-
-
 # ── Starlette 앱 ──
 
 app = Starlette(
     routes=[
         Route("/mcp", endpoint=MCPRoute()),   # GET + POST 모두 처리
         Route("/health", endpoint=health, methods=["GET"]),
-        Route("/api/check_heatwave", endpoint=check_heatwave, methods=["POST"]),  # 추가
-        Route("/api/check_rain", endpoint=check_rain, methods=["POST"]),          # 추가
     ],
     lifespan=lifespan,
 )

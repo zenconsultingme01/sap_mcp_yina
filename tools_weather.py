@@ -96,3 +96,27 @@ def get_weather(latitude: float, longitude: float, days: int = 3) -> dict:
 
     data = _fetch_weather(latitude, longitude, days)
     return _build_weather_response(data)
+
+@tool
+def check_heatwave(dates: str, max_temperatures: str) -> dict:
+    """날짜별 최고기온에서 30도 이상인 날을 찾습니다."""
+    date_list = [d.strip() for d in dates.split(",")]
+    temp_list = [float(t.strip()) for t in max_temperatures.split(",")]
+    alerts = [
+        {"date": date_list[i], "temp": temp_list[i]}
+        for i in range(len(date_list))
+        if temp_list[i] >= 30
+    ]
+    return {"alert": len(alerts) > 0, "dates": alerts}
+
+@tool
+def check_rain(dates: str, probabilities: str) -> dict:
+    """날짜별 강수확률에서 60% 이상인 날을 찾습니다."""
+    date_list = [d.strip() for d in dates.split(",")]
+    prob_list = [float(p.strip()) for p in probabilities.split(",")]
+    rainy = [
+        {"date": date_list[i], "probability": prob_list[i]}
+        for i in range(len(date_list))
+        if prob_list[i] >= 60
+    ]
+    return {"alert": len(rainy) > 0, "dates": rainy}
