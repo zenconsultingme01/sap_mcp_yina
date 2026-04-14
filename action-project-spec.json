@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "https://sap-mcp-server.cfapps.jp10.hana.ondemand.com"
+      "url": "https://sap-mcp-yina.cfapps.jp10.hana.ondemand.com"
     }
   ],
   "paths": {
